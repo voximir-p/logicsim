@@ -35,9 +35,50 @@ public:
         m_shape.setFillColor(color);
     }
 
+    void onMouseOver(const std::function<void()> &callback) {
+        m_onMouseHover = callback;
+    }
+
+    void onMouseOut(const std::function<void()> &callback) {
+        m_onMouseOut = callback;
+    }
+
+    void onClick(const std::function<void()> &callback) {
+        m_onClick = callback;
+    }
+
+    void processEvents(std::optional<sf::Event> &event) const {
+        if (const auto mouseButton = event->getIf<sf::Event::MouseButtonPressed>()) {
+            if (mouseButton->button == sf::Mouse::Button::Left) {
+                if (const auto mousePos = sf::Vector2f(mouseButton->position);
+                    m_shape.getGlobalBounds().contains(mousePos)) {
+                    if (m_onClick) {
+                        m_onClick();
+                    }
+                }
+            }
+        }
+
+        if (const auto mouseMove = event->getIf<sf::Event::MouseMoved>()) {
+            if (const auto mousePos = sf::Vector2f(mouseMove->position);
+                m_shape.getGlobalBounds().contains(mousePos)) {
+                if (m_onMouseHover) {
+                    m_onMouseHover();
+                }
+            } else {
+                if (m_onMouseOut) {
+                    m_onMouseOut();
+                }
+            }
+        }
+    }
+
 private:
     Superellipse m_shape;
     sf::Text m_text;
+    std::function<void()> m_onMouseHover;
+    std::function<void()> m_onMouseOut;
+    std::function<void()> m_onClick;
 
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override {
         target.draw(m_shape, states);

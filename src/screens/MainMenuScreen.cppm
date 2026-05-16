@@ -16,7 +16,7 @@ export class MainMenuScreen : public Screen {
     sf::Sprite m_logoSprite{m_logoTexture};
 
     Button m_settingsBtn{"Settings", m_font, 24};
-    Button m_exitBtn{"Exit", m_font, 24};
+    Button m_quitBtn{"Quit", m_font, 24};
 
 public:
     void buildScreen(sf::RenderWindow &window) override {
@@ -31,23 +31,28 @@ public:
         m_settingsBtn.setPosition(center);
         m_settingsBtn.setFillColor(ColorUtils::rgb(0x494952));
 
-        m_exitBtn.setSize({240.f, 80.f});
-        m_exitBtn.setPosition({center.x, center.y + 100.f});
-        m_exitBtn.setFillColor(ColorUtils::rgb(0x494952));
+        m_quitBtn.setSize({240.f, 80.f});
+        m_quitBtn.setPosition({center.x, center.y + 100.f});
+        m_quitBtn.setFillColor(ColorUtils::rgb(0x494952));
+        m_quitBtn.onMouseOver([this] {
+            m_quitBtn.setFillColor(ColorUtils::rgb(0x486ce9));
+        });
+        m_quitBtn.onMouseOut([this] {
+            m_quitBtn.setFillColor(ColorUtils::rgb(0x494952));
+        });
+        m_quitBtn.onClick([&window] {
+            window.close();
+        });
     }
 
     void render(sf::RenderWindow &window) const override {
         window.draw(m_logoSprite);
         window.draw(m_settingsBtn);
-        window.draw(m_exitBtn);
+        window.draw(m_quitBtn);
     }
 
     void processEvents(sf::RenderWindow &window, std::optional<sf::Event> &event) override {
-        if (const auto mouseButtonPressed = event->getIf<sf::Event::MouseButtonPressed>()) {
-            if (mouseButtonPressed->button == sf::Mouse::Button::Left) {
-                // Move
-            }
-        }
+        m_quitBtn.processEvents(event);
     }
 
     [[nodiscard]]
