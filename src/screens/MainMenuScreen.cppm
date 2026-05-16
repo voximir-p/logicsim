@@ -27,11 +27,11 @@ public:
         m_logoSprite.setPosition({center.x, 0.f});
         m_logoSprite.setScale({0.5f, 0.5f});
 
-        m_settingsBtn.setSize({120.f, 40.f});
+        m_settingsBtn.setSize({240.f, 80.f});
         m_settingsBtn.setPosition(center);
         m_settingsBtn.setFillColor(ColorUtils::rgb(0x494952));
 
-        m_exitBtn.setSize({120.f, 40.f});
+        m_exitBtn.setSize({240.f, 80.f});
         m_exitBtn.setPosition({center.x, center.y + 100.f});
         m_exitBtn.setFillColor(ColorUtils::rgb(0x494952));
     }

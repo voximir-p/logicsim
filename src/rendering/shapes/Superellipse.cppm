@@ -35,8 +35,8 @@ public:
     }
 
     void setSize(const sf::Vector2f &size) {
-        m_width = std::max(size.x, 0.f);
-        m_height = std::max(size.y, 0.f);
+        m_width = std::max(size.x, 0.f) / 2.f;
+        m_height = std::max(size.y, 0.f) / 2.f;
         updateRadius();
         update();
     }
