@@ -15,8 +15,8 @@ export class MainMenuScreen : public Screen {
     sf::Texture m_logoTexture{"data/images/logo.png"};
     sf::Sprite m_logoSprite{m_logoTexture};
 
-    Button m_settingsBtn{"Settings", m_font, 22};
-    Button m_exitBtn{"Exit", m_font, 22};
+    Button m_settingsBtn{"Settings", m_font, 24};
+    Button m_exitBtn{"Exit", m_font, 24};
 
 public:
     void buildScreen(sf::RenderWindow &window) override {
