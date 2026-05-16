@@ -10,7 +10,7 @@ import screens.Screen;
 import AppState;
 
 export class MainMenuScreen : public Screen {
-    sf::Font m_font{"data/fonts/JetBrainsMono-Regular.ttf"};
+    sf::Font m_font{"data/fonts/GeistMono-Regular.ttf"};
 
     sf::Texture m_logoTexture{"data/images/logo.png"};
     sf::Sprite m_logoSprite{m_logoTexture};
